@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FormControl, Select, Slider, Stack, TextField} from "@mui/material";
+import {FormControl, InputLabel, Select, Slider, Stack, TextField} from "@mui/material";
 import {useState} from "react";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
@@ -47,67 +47,59 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                     max={500}
                 />
             </Stack>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                    value={sortDate}
-                    onChange={(e) => setSortDate(e.target.value)}
-                    label="Created Date"
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="desc">Desc</MenuItem>
-                    <MenuItem value="asc">Asc</MenuItem>
-                </Select>
-            </FormControl>
+            <Typography variant="body2" color="text.secondary" className="filter-label">
+                Created Date
+            </Typography>
+            <Select
+                value={sortDate}
+                onChange={(e) => setSortDate(e.target.value)}
+                label="Created Date"
+            >
+                <MenuItem value="">
+                    <em>None</em>
+                </MenuItem>
+                <MenuItem value="desc">Desc</MenuItem>
+                <MenuItem value="asc">Asc</MenuItem>
+            </Select>
             <Typography variant="body2" color="text.secondary" className="filter-label">
                 Time
             </Typography>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                    value={sortDate}
-                    onChange={(e) => setSortDate(e.target.value)}
-                    label="Time"
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="desc">Desc</MenuItem>
-                    <MenuItem value="asc">Asc</MenuItem>
-                </Select>
-            </FormControl>
+            <Select
+                value={sortDate}
+                onChange={(e) => setSortDate(e.target.value)}
+            >
+                <MenuItem value="">
+                    <em>None</em>
+                </MenuItem>
+                <MenuItem value="desc">Desc</MenuItem>
+                <MenuItem value="asc">Asc</MenuItem>
+            </Select>
             <Typography variant="body2" color="text.secondary" className="filter-label">
                 Tier
             </Typography>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                    value={sortDate}
-                    onChange={(e) => setSortDate(e.target.value)}
-                    label="Time"
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="desc">Desc</MenuItem>
-                    <MenuItem value="asc">Asc</MenuItem>
-                </Select>
-            </FormControl>
+            <Select
+                value={sortDate}
+                onChange={(e) => setSortDate(e.target.value)}
+            >
+                <MenuItem value="">
+                    <em>None</em>
+                </MenuItem>
+                <MenuItem value="desc">Desc</MenuItem>
+                <MenuItem value="asc">Asc</MenuItem>
+            </Select>
             <Typography variant="body2" color="text.secondary" className="filter-label">
                 Price
             </Typography>
-            <FormControl sx={{ m: 1, minWidth: 120 }}>
-                <Select
-                    value={sortDate}
-                    onChange={(e) => setSortDate(e.target.value)}
-                    label="Time"
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="desc">Desc</MenuItem>
-                    <MenuItem value="asc">Asc</MenuItem>
-                </Select>
-            </FormControl>
+            <Select
+                value={sortDate}
+                onChange={(e) => setSortDate(e.target.value)}
+            >
+                <MenuItem value="">
+                    <em>None</em>
+                </MenuItem>
+                <MenuItem value="desc">Desc</MenuItem>
+                <MenuItem value="asc">Asc</MenuItem>
+            </Select>
             <Stack
                 direction="row"
                 justifyContent="space-between"

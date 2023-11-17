@@ -21,3 +21,14 @@
     margin-right: 24px;
     margin-bottom: 24px;
 }
+
+.product-image {
+    position: relative;
+}
+
+.overlay {
+    width: 90%;
+    position: absolute;
+    top: 0;
+    padding: 12px;
+}

@@ -12,16 +12,16 @@ export default function Dashboard(){
     const [products, setProducts] = useState([]);
     const [skip, setSkip] = useState(0);
     const [isMore, setIsMore] = useState(true);
-    const listButton = ['ALL', 'Product 1', 'Product 2', 'Product 3', 'Product 4', 'Product 6', 'Product 7', 'Product 8'];
+    const [filter, setFilter] = useState({type: 'ALL'})
+    const listButton = ['ALL', 'COMMON', 'RARE', 'EPIC', 'LEGENDARY'];
 
     useEffect(() => {
         getProduct();
+    }, [filter]);
+
+    useEffect(() => {
         const intervalCall = setInterval(() => {
-            setProducts(() => {
-                setSkip(0);
-                getProduct();
-                return [];
-            });
+            getProduct();
         }, 60000);
         return () => {
             // clean up
@@ -31,23 +31,32 @@ export default function Dashboard(){
 
     const loadMore = () => {
         setSkip(skip => {
-            getProduct();
+            getProduct(true);
             return skip + limit;
         });
     }
 
-    const getProduct = () => {
+    const getProduct = (isLoadMore = false) => {
         const getData = setTimeout(() => {
             let url = '/api/products' + '?limit=' + limit + '&skip=' + skip;
+            if(filter.type) {
+                url += '&type=' + filter.type;
+            }
             fetch(url)
                 .then((response) => response.json())
                 .then((data) => {
-                    if(data.length === 0) {
+                    if(data.length < limit) {
                         setIsMore(false);
-                        return;
+                    }else {
+                        setIsMore(true);
                     }
-                    setIsMore(true);
-                    setProducts(products => [...products, ...data]);
+
+                    if(isLoadMore) {
+                        setProducts(products => [...products, ...data]);
+                    } else {
+                        console.log(data);
+                        setProducts(data);
+                    }
                 })
                 .catch((err) => {
                     console.log(err.message);
@@ -81,6 +90,11 @@ export default function Dashboard(){
         });
     }
 
+    const handleTypeFilter = (type) => {
+        setSkip(0);
+        setFilter({...filter, type});
+    }
+
     return (
         <>
             <ResponsiveAppBar />
@@ -94,7 +108,7 @@ export default function Dashboard(){
                         alignItems="flex-start"
                         spacing={2}
                     >
-                        {listButton.map((item, index) => <Button key={index} variant={index === 0 ? "contained" : "outlined"}>{item}</Button>)}
+                        {listButton.map((item, index) => <Button key={index} variant={item === filter.type ? "contained" : "outlined"} onClick={() => handleTypeFilter(item)}>{item}</Button>)}
                     </Stack>
                     <Stack
                         mt={1}
@@ -103,7 +117,7 @@ export default function Dashboard(){
                         alignItems="center"
                     >
                         <ProductList products={products}></ProductList>
-                        {(products.length >= 8 && isMore )&& <Button onClick={loadMore} color="primary" variant="contained" className="load-more-btn">Load More</Button>}
+                        {(products.length >= 8 && isMore )&& <Button onClick={loadMore} color="primary" variant="contained" className="load-more-btn" size="large">View More</Button>}
                     </Stack>
                 </Grid>
             </Grid>
