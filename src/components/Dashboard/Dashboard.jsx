@@ -1,11 +1,12 @@
 import ResponsiveAppBar from "../AppBar/AppBar.jsx";
-import {Grid, Stack} from "@mui/material";
+import {Backdrop, CircularProgress, Grid, Stack} from "@mui/material";
 import {Sidebar} from "../Sidebar/Sidebar.jsx";
 import ProductList from "../ProductList/ProductList.jsx";
 import {useCallback, useEffect, useState} from "react";
 import {debounce} from "lodash";
 import Button from "@mui/material/Button";
 import './Dashboard.css';
+import Box from "@mui/material/Box";
 export default function Dashboard(){
 
     const limit = 8;
@@ -13,6 +14,7 @@ export default function Dashboard(){
     const [skip, setSkip] = useState(0);
     const [isMore, setIsMore] = useState(true);
     const [filter, setFilter] = useState({type: 'ALL'})
+    const [loading, setLoading] = useState(false);
     const listButton = ['ALL', 'COMMON', 'RARE', 'EPIC', 'LEGENDARY'];
 
     useEffect(() => {
@@ -37,6 +39,7 @@ export default function Dashboard(){
     }
 
     const getProduct = (isLoadMore = false) => {
+        setLoading(true);
         const getData = setTimeout(() => {
             let url = '/api/products' + '?limit=' + limit + '&skip=' + skip;
             if(filter.type) {
@@ -60,7 +63,9 @@ export default function Dashboard(){
                 })
                 .catch((err) => {
                     console.log(err.message);
-                });
+                }).finally(() => {
+                setLoading(false);
+            });
             return () => {
                 clearTimeout(getData);
             }
@@ -106,6 +111,12 @@ export default function Dashboard(){
                     >
                         {listButton.map((item, index) => <Button key={index} variant={item === filter.type ? "contained" : "outlined"} onClick={() => handleTypeFilter(item)}>{item}</Button>)}
                     </Stack>
+                    <Backdrop
+                        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={loading}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
                     <Stack
                         mt={1}
                         direction="column"
