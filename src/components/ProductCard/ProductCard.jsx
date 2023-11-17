@@ -3,39 +3,35 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import PropTypes from "prop-types";
-import moment from "moment";
 import {Stack} from "@mui/material";
+import './ProductCard.css';
 
 // eslint-disable-next-line react/prop-types
 export default function ProductCard({product}) {
-    const {name, description, url, price, createdDate} = product;
+    const {name, description, url, price} = product;
     return (
-        <Card>
+        <Card className="product-card">
             <CardMedia
                 component="img"
-                height="194"
+                height="320"
                 image={url}
-                alt="Paella dish"
+                alt=""
             />
             <CardContent>
                 <Stack
-                    direction="column"
-                    justifyContent="space-around"
-                    alignItems="stretch"
+                    direction="row"
+                    justifyContent="space-between
+"
                     spacing={2}
                 >
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" className="description">
                         {description}
                     </Typography>
-                    <Typography variant="body2" color="text.primary">
+                    <Typography variant="body2" color="text.primary" className="price">
                         {price}
                     </Typography>
                 </Stack>
@@ -47,16 +43,7 @@ export default function ProductCard({product}) {
                     </Avatar>
                 }
                 title={name}
-                subheader={moment(createdDate).format()}
             />
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
-            </CardActions>
         </Card>
     );
 }

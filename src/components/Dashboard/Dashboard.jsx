@@ -1,16 +1,18 @@
-import ResponsiveAppBar from "./AppBar.jsx";
+import ResponsiveAppBar from "../AppBar/AppBar.jsx";
 import {Grid, Stack} from "@mui/material";
-import {Sidebar} from "./Sidebar.jsx";
-import ProductList from "./ProductList.jsx";
+import {Sidebar} from "../Sidebar/Sidebar.jsx";
+import ProductList from "../ProductList/ProductList.jsx";
 import {useCallback, useEffect, useState} from "react";
 import {debounce} from "lodash";
 import Button from "@mui/material/Button";
+import './Dashboard.css';
 export default function Dashboard(){
 
     const limit = 8;
     const [products, setProducts] = useState([]);
     const [skip, setSkip] = useState(0);
     const [isMore, setIsMore] = useState(true);
+    const listButton = ['ALL', 'Product 1', 'Product 2', 'Product 3', 'Product 4', 'Product 6', 'Product 7', 'Product 8'];
 
     useEffect(() => {
         getProduct();
@@ -71,22 +73,41 @@ export default function Dashboard(){
 
     const debouncedHandleSearch = useCallback(debounce(handleSearch, 500), []);
 
-    return (
-        <Grid container spacing={2} mt={1}>
-            <Grid item xs={12}>
-                <ResponsiveAppBar />
-            </Grid>
-            <Grid item xs={3}>
-                <Sidebar searchValueChange={(value) => debouncedHandleSearch(value)}></Sidebar>
-            </Grid>
-            <Grid item xs={9}>
-                <Stack spacing={1}>
-                    <ProductList products={products}></ProductList>
-                    {(products.length >= 8 && isMore )&& <Button onClick={loadMore} color="primary" variant="contained">Load More</Button>}
-                </Stack>
-            </Grid>
+    const handleClearFilters = () => {
+        setProducts(() => {
+            setSkip(0);
+            getProduct();
+            return [];
+        });
+    }
 
-        </Grid>
+    return (
+        <>
+            <ResponsiveAppBar />
+            <Grid container spacing={2} mt={2}>
+                <Grid item xs={3}>
+                    <Sidebar searchValueChange={(value) => debouncedHandleSearch(value)} onClearFilters={handleClearFilters}></Sidebar>
+                </Grid>
+                <Grid item xs={9}>
+                    <Stack
+                        direction="row"
+                        alignItems="flex-start"
+                        spacing={2}
+                    >
+                        {listButton.map((item, index) => <Button key={index} variant={index === 0 ? "contained" : "outlined"}>{item}</Button>)}
+                    </Stack>
+                    <Stack
+                        direction="column"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                        spacing={2}
+                    >
+                        <ProductList products={products}></ProductList>
+                        {(products.length >= 8 && isMore )&& <Button onClick={loadMore} color="primary" variant="contained" className="load-more-btn">Load More</Button>}
+                    </Stack>
+                </Grid>
+            </Grid>
+        </>
     );
 }
 
