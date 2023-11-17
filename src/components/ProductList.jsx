@@ -1,4 +1,4 @@
-import {Grid, Stack} from "@mui/material";
+import {Grid} from "@mui/material";
 import ProductCard from "./ProductCard.jsx";
 import PropTypes from "prop-types";
 

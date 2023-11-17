@@ -19,3 +19,9 @@ There a lot of things I can do if have more time & clear requirement:
 - Improve UI/UX
 - Change to use Redux for state management
 - Clean code and structure
+
+
+Before run this project, you should start the BE code and DB mongodb first.
+
+I have another project for BE code, you can find it here:
+https://github.com/tgiabao1340/quick-test-be

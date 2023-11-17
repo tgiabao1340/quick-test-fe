@@ -4,21 +4,18 @@ import {Sidebar} from "./Sidebar.jsx";
 import ProductList from "./ProductList.jsx";
 import {useCallback, useEffect, useState} from "react";
 import {debounce} from "lodash";
-import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 export default function Dashboard(){
 
+    const limit = 8;
     const [products, setProducts] = useState([]);
-    const [limit, setLimit] = useState(8);
     const [skip, setSkip] = useState(0);
     const [isMore, setIsMore] = useState(true);
-    const [name, setName] = useState('');
 
     useEffect(() => {
         getProduct();
         const intervalCall = setInterval(() => {
             setProducts(() => {
-                setName('');
                 setSkip(0);
                 getProduct();
                 return [];
@@ -59,8 +56,9 @@ export default function Dashboard(){
         }, 500); // Debounce 500ms
 
     }
-    const handleSearch = (value) => {
-        let url = '/api/products' + '?limit=' + limit + '&skip=' + skip + '&name=' + value;
+    const handleSearch = (search) => {
+        const {price, keyword} = search;
+        let url = '/api/products' + '?limit=' + limit + '&skip=' + skip + '&name=' + keyword + '&priceMin=' + price[0] + '&priceMax=' + price[1];
         fetch(url)
             .then((response) => response.json())
             .then((data) => {

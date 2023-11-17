@@ -11,10 +11,12 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import PropTypes from "prop-types";
+import moment from "moment";
+import {Stack} from "@mui/material";
 
 // eslint-disable-next-line react/prop-types
 export default function ProductCard({product}) {
-    const {name, description, url, createdDate} = product;
+    const {name, description, url, price, createdDate} = product;
     return (
         <Card>
             <CardMedia
@@ -24,9 +26,19 @@ export default function ProductCard({product}) {
                 alt="Paella dish"
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                    {description}
-                </Typography>
+                <Stack
+                    direction="column"
+                    justifyContent="space-around"
+                    alignItems="stretch"
+                    spacing={2}
+                >
+                    <Typography variant="body2" color="text.secondary">
+                        {description}
+                    </Typography>
+                    <Typography variant="body2" color="text.primary">
+                        {price}
+                    </Typography>
+                </Stack>
             </CardContent>
             <CardHeader
                 avatar={
@@ -35,7 +47,7 @@ export default function ProductCard({product}) {
                     </Avatar>
                 }
                 title={name}
-                subheader={createdDate}
+                subheader={moment(createdDate).format()}
             />
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">
