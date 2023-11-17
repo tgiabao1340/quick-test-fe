@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
+import {blue} from '@mui/material/colors';
 import PropTypes from "prop-types";
 import {Stack} from "@mui/material";
 import './ProductCard.css';
@@ -33,8 +33,8 @@ export default function ProductCard({product}) {
                         alignItems="flex-start"
                         spacing={2}
                     >
-                        <Button variant="outlined">{type}</Button>
-                        <IconButton color="default">
+                        <Button variant="contained">{type}</Button>
+                        <IconButton color="info">
                             <FavoriteIcon />
                         </IconButton>
                     </Stack>
@@ -50,13 +50,13 @@ export default function ProductCard({product}) {
                         {description}
                     </Typography>
                     <Typography variant="body2" color="text.primary" className="price">
-                        {price}
+                        {price}$
                     </Typography>
                 </Stack>
             </CardContent>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="user">
+                    <Avatar sx={{ bgcolor: blue[500] }} aria-label="user">
                         U
                     </Avatar>
                 }
