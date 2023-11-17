@@ -53,7 +53,6 @@ export function Sidebar({searchValueChange, onClearFilter}) {
             <Select
                 value={sortDate}
                 onChange={(e) => setSortDate(e.target.value)}
-                label="Created Date"
             >
                 <MenuItem value="">
                     <em>None</em>
