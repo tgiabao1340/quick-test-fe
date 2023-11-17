@@ -6,7 +6,7 @@ import {useCallback, useEffect, useState} from "react";
 import {debounce} from "lodash";
 import Button from "@mui/material/Button";
 import './Dashboard.css';
-import Box from "@mui/material/Box";
+
 export default function Dashboard(){
 
     const limit = 8;
