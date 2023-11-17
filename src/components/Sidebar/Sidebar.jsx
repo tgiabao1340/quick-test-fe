@@ -1,5 +1,5 @@
 import * as React from "react";
-import {FormControl, InputLabel, Select, Slider, Stack, TextField} from "@mui/material";
+import {Select, Slider, Stack, TextField} from "@mui/material";
 import {useState} from "react";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,9 +11,11 @@ export function Sidebar({searchValueChange, onClearFilter}) {
     const [keyword, setKeyword] = useState("");
     const [price, setPrice] = useState([0, 500]);
     const [sortDate, setSortDate] = useState("");
+    const [sortTier, setSortTier] = useState("");
+    const [sortPrice, setSortPrice] = useState("");
 
     const onSearchValue = () => {
-        searchValueChange({keyword, price});
+        searchValueChange({keyword, price, sortPrice, sortDate, sortTier});
     }
 
     const handleChangePrice = (event, newValue) => {
@@ -24,6 +26,8 @@ export function Sidebar({searchValueChange, onClearFilter}) {
         setKeyword("");
         setPrice([0, 500]);
         setSortDate("");
+        setSortTier("");
+        setSortPrice("");
         onClearFilter();
     }
 
@@ -48,19 +52,6 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                 />
             </Stack>
             <Typography variant="body2" color="text.secondary" className="filter-label">
-                Created Date
-            </Typography>
-            <Select
-                value={sortDate}
-                onChange={(e) => setSortDate(e.target.value)}
-            >
-                <MenuItem value="">
-                    <em>None</em>
-                </MenuItem>
-                <MenuItem value="desc">Desc</MenuItem>
-                <MenuItem value="asc">Asc</MenuItem>
-            </Select>
-            <Typography variant="body2" color="text.secondary" className="filter-label">
                 Time
             </Typography>
             <Select
@@ -70,15 +61,15 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
-                <MenuItem value="desc">Desc</MenuItem>
-                <MenuItem value="asc">Asc</MenuItem>
+                <MenuItem value="desc">Latest</MenuItem>
+                <MenuItem value="asc">Oldest</MenuItem>
             </Select>
             <Typography variant="body2" color="text.secondary" className="filter-label">
                 Tier
             </Typography>
             <Select
-                value={sortDate}
-                onChange={(e) => setSortDate(e.target.value)}
+                value={sortTier}
+                onChange={(e) => setSortTier(e.target.value)}
             >
                 <MenuItem value="">
                     <em>None</em>
@@ -90,14 +81,14 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                 Price
             </Typography>
             <Select
-                value={sortDate}
-                onChange={(e) => setSortDate(e.target.value)}
+                value={sortPrice}
+                onChange={(e) => setSortPrice(e.target.value)}
             >
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
-                <MenuItem value="desc">Desc</MenuItem>
-                <MenuItem value="asc">Asc</MenuItem>
+                <MenuItem value="desc">High to low</MenuItem>
+                <MenuItem value="asc">Low to high</MenuItem>
             </Select>
             <Stack
                 direction="row"

@@ -83,11 +83,7 @@ export default function Dashboard(){
     const debouncedHandleSearch = useCallback(debounce(handleSearch, 500), []);
 
     const handleClearFilters = () => {
-        setProducts(() => {
-            setSkip(0);
-            getProduct();
-            return [];
-        });
+        setFilter({type: 'ALL'});
     }
 
     const handleTypeFilter = (type) => {
@@ -100,7 +96,7 @@ export default function Dashboard(){
             <ResponsiveAppBar />
             <Grid container spacing={2} mt={2}>
                 <Grid item xs={3}>
-                    <Sidebar searchValueChange={(value) => debouncedHandleSearch(value)} onClearFilters={handleClearFilters}></Sidebar>
+                    <Sidebar searchValueChange={(value) => debouncedHandleSearch(value)} onClearFilter={handleClearFilters}></Sidebar>
                 </Grid>
                 <Grid item xs={9}>
                     <Stack
