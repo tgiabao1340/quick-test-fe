@@ -105,6 +105,8 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                 justifyContent="space-between"
                 alignItems="center"
                 spacing={2}
+                useFlexGap
+                flexWrap="wrap"
             >
                 <Button variant="outlined" fullWidth onClick={handleClearFilter}>Clear Filter</Button>
                 <Button variant="contained" fullWidth color="primary" onClick={onSearchValue}>Search</Button>
