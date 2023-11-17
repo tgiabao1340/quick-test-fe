@@ -21,7 +21,11 @@ There a lot of things I can do if have more time & clear requirement:
 - Clean code and structure
 
 
-Before run this project, you should start the BE code and DB mongodb first.
+Before run this project, you should start the BE code and DB(mongodb) first.
 
 I have another project for BE code, you can find it here:
 https://github.com/tgiabao1340/quick-test-be
+
+The total time I spent for this project is about 8 hours.
+
+Thanks for your time to review my code.
