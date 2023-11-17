@@ -1,8 +1,10 @@
-import {FormControl, InputLabel, Select, Slider, Stack, TextField} from "@mui/material";
+import * as React from "react";
+import {FormControl, Select, Slider, Stack, TextField} from "@mui/material";
 import {useState} from "react";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import './Sidebar.css';
+import Typography from "@mui/material/Typography";
 
 export function Sidebar({searchValueChange, onClearFilter}) {
 
@@ -21,6 +23,7 @@ export function Sidebar({searchValueChange, onClearFilter}) {
     const handleClearFilter = () => {
         setKeyword("");
         setPrice([0, 500]);
+        setSortDate("");
         onClearFilter();
     }
 
@@ -32,9 +35,9 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                 justifyContent="flex-start"
                 alignItems="flex-start"
             >
-                <span className="filter-label" >
+                <Typography variant="body2" color="text.secondary" className="filter-label">
                     Price
-                </span>
+                </Typography>
                 <Slider
                     getAriaLabel={() => 'Temperature range'}
                     value={price}
@@ -57,7 +60,9 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                     <MenuItem value="asc">Asc</MenuItem>
                 </Select>
             </FormControl>
-            <span className="filter-label" >Time</span>
+            <Typography variant="body2" color="text.secondary" className="filter-label">
+                Time
+            </Typography>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <Select
                     value={sortDate}
@@ -71,7 +76,9 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                     <MenuItem value="asc">Asc</MenuItem>
                 </Select>
             </FormControl>
-            <span className="filter-label" >Tier</span>
+            <Typography variant="body2" color="text.secondary" className="filter-label">
+                Tier
+            </Typography>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <Select
                     value={sortDate}
@@ -85,7 +92,9 @@ export function Sidebar({searchValueChange, onClearFilter}) {
                     <MenuItem value="asc">Asc</MenuItem>
                 </Select>
             </FormControl>
-            <span className="filter-label" >Price</span>
+            <Typography variant="body2" color="text.secondary" className="filter-label">
+                Price
+            </Typography>
             <FormControl sx={{ m: 1, minWidth: 120 }}>
                 <Select
                     value={sortDate}

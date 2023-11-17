@@ -97,10 +97,10 @@ export default function Dashboard(){
                         {listButton.map((item, index) => <Button key={index} variant={index === 0 ? "contained" : "outlined"}>{item}</Button>)}
                     </Stack>
                     <Stack
+                        mt={1}
                         direction="column"
                         justifyContent="flex-start"
                         alignItems="center"
-                        spacing={2}
                     >
                         <ProductList products={products}></ProductList>
                         {(products.length >= 8 && isMore )&& <Button onClick={loadMore} color="primary" variant="contained" className="load-more-btn">Load More</Button>}
